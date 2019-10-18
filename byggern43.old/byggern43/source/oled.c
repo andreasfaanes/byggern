@@ -109,12 +109,18 @@ void oled_print_custom(char character,uint8_t column){
 }
 
 void print_lunde(void){
-	volatile char *oled_data;
-	for (uint16_t i = 0; i < 128; i++)
+	volatile char *oled_write = (char *) 0x1200;
+	oled_command_write(OLED_SET_COLUMN_ADDR_RANGE);
+	oled_command_write(0);
+	oled_command_write(0x7f);
+			
+	oled_command_write(OLED_SET_PAGE_ADDR);
+	oled_command_write(0);
+	oled_command_write(0x07);
+	for (uint16_t i = 0; i < 0x400; i++)
 	{
-		oled_data = (char *)(0x1800+i);
-		oled_data = lunde_byte(i);
-		printf("%x",lunde_byte(i));
+		*oled_write = lunde_byte(i);
+		//printf("%x",lunde_byte(i));
 	}	
 }
 

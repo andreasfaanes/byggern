@@ -6,3 +6,5 @@
 #define OLED_COM_MEM_START 0x1000
 
 #define JOYCON_MID 127
+
+#define F_CPU 4915200

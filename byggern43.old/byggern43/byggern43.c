@@ -16,21 +16,20 @@
 #include "source/include/oled.h"
 #include "source/include/MCP2515.h"
 #include "source/include/can.h"
+#include "source/include/music.h"
 #include <stdlib.h>
 
 
 
 // calls when timer overflows
-ISR(TIMER0_OVF_vect){
-	//oled_update();
 
+ISR(TIMER0_OVF_vect){
+	oled_update();
 }
 
 void int_timer_setup(void){
-	TIMSK=(1<<TOIE0);  // interupt on timer overflow
-	TCNT0=0x00; // start value for counter
-	TCCR0 = (1<<CS01)| (1<<CS00); // prescaler set to 256
-	sei(); // global interupt enable
+
+	
 }
 
 void SRAM_test(void)
@@ -67,7 +66,7 @@ void SRAM_test(void)
 		}
 		//_delay_ms(500);
 	}
-	printf("SRAM test completed with\n%4d errors in write phase and\n%4d errorsin retrieval phase\n\n\r", write_errors, retrieval_errors);
+	printf("SRAM test completed with\n%4d errors in write phase and\n%4d errors in retrieval phase\n\n\r", write_errors, retrieval_errors);
 }
 
 joycon_t joycon;
@@ -90,24 +89,42 @@ void test_function_joycon_loop(void){
 // main function
 int main(void)
 {
+	
 	USART_init(MYUBRR);
+	DDRD |= (1 << PIND5);
 	printf("start!\n\r");
 	user_control_init();
-	int_timer_setup();
+	cli();
 	oled_menu_setup();
 	can_init();
-	can_data_t data;
-	data.id = 1;
-	data.length = 3;
-	data.data[0] = 'h';
-	data.data[1] = 'e';
-	data.data[2] = 'y';
-	//print_lunde();
+	music_init();
+	//oled_reset();
+	//oled_update();
+	music_start();
+	
+	sei(); // global interupt enable
+	printf("Her? \n\r");
 	while(1)
 	{	
+		//PORTD |= (1 << PIND5);
 		menu_navigation();
 		//slider_send_pos();
 		//_delay_ms(300);
-		oled_update();
+		
+		//print_lunde();
+		//printf("done");
 	}
+}
+
+volatile uint8_t note = 0;
+
+ISR(TIMER3_COMPA_vect){
+	//music_play_note(get_note(note),get_tempo(note));
+	if (note >= MELODY_LENGTH)
+	{
+		note = 0;
+	}else{
+		note ++;
+	}
+	
 }

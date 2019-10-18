@@ -14,7 +14,11 @@ source\ext_mem.c
 
 source\MCP2515.c
 
+source\music.c
+
 source\oled.c
+
+source\timer.c
 
 source\spi.c
 

@@ -76,7 +76,7 @@ void update_menu(void){
 			menu_line_change(current_menu->child[i]->title,i+1,0);
 		}
 	}
-	menu_line_change(' ', i+2, 0);
+	menu_line_change(" ", i+2, 0);
 	oled_print_custom(0,i+2);
 }
 

@@ -176,7 +176,13 @@
     <Compile Include="source\include\MCP2515.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="source\include\music.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="source\include\oled.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="source\include\timer.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="source\include\settings.h">
@@ -188,7 +194,13 @@
     <Compile Include="source\MCP2515.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="source\music.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="source\oled.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="source\timer.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="source\spi.c">

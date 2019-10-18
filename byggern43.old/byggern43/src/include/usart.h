@@ -3,8 +3,8 @@
 
 #include <avr/io.h>
 #include <stdio.h>
+#include "settings.h"
 
-#define F_CPU 4915200
 
 #define BAUD 9600
 #define MYUBRR F_CPU/16/BAUD-1

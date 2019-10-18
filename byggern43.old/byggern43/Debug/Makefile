@@ -45,7 +45,9 @@ C_SRCS +=  \
 ../source/can.c \
 ../source/ext_mem.c \
 ../source/MCP2515.c \
+../source/music.c \
 ../source/oled.c \
+../source/timer.c \
 ../source/spi.c \
 ../source/usercontrol.c \
 ../src/src/usart.c
@@ -64,7 +66,9 @@ source/asciitable.o \
 source/can.o \
 source/ext_mem.o \
 source/MCP2515.o \
+source/music.o \
 source/oled.o \
+source/timer.o \
 source/spi.o \
 source/usercontrol.o \
 source/usart.o
@@ -76,7 +80,9 @@ source/asciitable.o \
 source/can.o \
 source/ext_mem.o \
 source/MCP2515.o \
+source/music.o \
 source/oled.o \
+source/timer.o \
 source/spi.o \
 source/usercontrol.o \
 source/usart.o
@@ -88,7 +94,9 @@ source/asciitable.d \
 source/can.d \
 source/ext_mem.d \
 source/MCP2515.d \
+source/music.d \
 source/oled.d \
+source/timer.d \
 source/spi.d \
 source/usercontrol.d \
 source/usart.d
@@ -100,7 +108,9 @@ source/asciitable.d \
 source/can.d \
 source/ext_mem.d \
 source/MCP2515.d \
+source/music.d \
 source/oled.d \
+source/timer.d \
 source/spi.d \
 source/usercontrol.d \
 source/usart.d
@@ -161,7 +171,21 @@ source/MCP2515.o: ../source/MCP2515.c
 	@echo Finished building: $<
 	
 
+source/music.o: ../source/music.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega162" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 source/oled.o: ../source/oled.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega162" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+source/timer.o: ../source/timer.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\include"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\gcc\dev\atmega162" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
