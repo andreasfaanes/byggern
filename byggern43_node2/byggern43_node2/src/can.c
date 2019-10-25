@@ -42,7 +42,7 @@ void can_send_msg(can_data_t* data){
 void can_recieve_msg(can_data_t* data){
 	
 	if (mcp_read(MCP_CANINTF) & 0x01){
-		printf("VALID MESSAGE \n\r");
+		//printf("VALID MESSAGE \n\r");
 		uint8_t idhigh = mcp_read(MCP_RXB0SIDH);
 		uint8_t idlow = mcp_read(MCP_RXB0SIDL);
 		data->id = (idhigh << 3)|(idlow >> 5);

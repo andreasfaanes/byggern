@@ -2,11 +2,15 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\ADC.c
+
 src\can.c
 
 src\MCP2515.c
 
 src\spi.c
+
+src\timer.c
 
 src\usart.c
 
