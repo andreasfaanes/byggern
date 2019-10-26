@@ -2,6 +2,7 @@
 #include "can.h"
 #include "timer.h"
 #include "ADC.h"
+#include "motor.h"
 #include <asf.h>
 #include <util/delay.h>
 #include <avr/io.h>
@@ -18,14 +19,17 @@ int main (void)
 	timer_init();
 	adc_init();
 	sei();
+	timer_1_set_top(125);
+	motor_init();
 	while (1)
 	{
 		//printf("he");
 		can_recieve_msg(&data);
 		if (data.id != 0)
 		{
-			printf("ID = %u, leftslider: %u, rightslider: %u \r",data.id, data.data[0], data.data[1]);
+			//printf("ID = %u, leftslider: %u, rightslider: %u \r",data.id, data.data[0], data.data[1]);
 			timer_1_set_top(data.data[0]);
+			motor_update_pos(data.data[1]);
 		}
 	}
 }

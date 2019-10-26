@@ -8,9 +8,13 @@ src\can.c
 
 src\MCP2515.c
 
+src\motor.c
+
 src\spi.c
 
 src\timer.c
+
+src\TWI_Master.c
 
 src\usart.c
 

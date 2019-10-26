@@ -82,7 +82,7 @@
     <com_atmel_avrdbg_tool_atmelice>
       <ToolOptions>
         <InterfaceProperties>
-          <JtagDbgClock>200000</JtagDbgClock>
+          <JtagDbgClock>208000</JtagDbgClock>
         </InterfaceProperties>
         <InterfaceName>JTAG</InterfaceName>
       </ToolOptions>
@@ -102,7 +102,7 @@
       </ToolNumber>
       <ToolName xmlns="">Simulator</ToolName>
     </com_atmel_avrdbg_tool_simulator>
-    <avrtoolinterfaceclock>200000</avrtoolinterfaceclock>
+    <avrtoolinterfaceclock>208000</avrtoolinterfaceclock>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -250,6 +250,12 @@
     <Compile Include="src\MCP2515.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\motor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\motor.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\spi.c">
       <SubType>compile</SubType>
     </Compile>
@@ -260,6 +266,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\timer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\TWI_Master.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\TWI_Master.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\usart.c">

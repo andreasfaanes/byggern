@@ -24,10 +24,12 @@ void timer_init(void){
 	TCCR1A |= (1 << COM1A1) | (1 << WGM11) /*| (1 << WGM10)*/;
 	TCCR1B |= (1 << WGM13) | (1 << WGM12) | (1 << CS10) | (1 << CS11);
 	ICR1 = 5000;
+	OCR1A = 300;
 }
 
 void timer_1_set_top(uint16_t top_val){
-	uint16_t x = ((top_val*250)/84)+(225);
+	//Formula in ordr to make the dutycycle of the PWM. Done by computing the prescaler. Had to invert the input (100-top_val) in order to get the orientation right
+	uint16_t x = (((100-top_val)*250)/84)+(225);
 	if (x <= 230)
 	{
 		x = 230;

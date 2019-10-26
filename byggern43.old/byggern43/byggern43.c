@@ -108,7 +108,7 @@ int main(void)
 	{	
 		//PORTD |= (1 << PIND5);
 		menu_navigation();
-		//slider_send_pos();
+		slider_send_pos();
 		//_delay_ms(300);
 		
 		//print_lunde();
