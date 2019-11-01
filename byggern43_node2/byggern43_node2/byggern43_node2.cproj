@@ -244,6 +244,12 @@
     <Compile Include="src\can.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\encoder.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\encoder.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\MCP2515.c">
       <SubType>compile</SubType>
     </Compile>

@@ -3,6 +3,7 @@
 #include "timer.h"
 #include "ADC.h"
 #include "motor.h"
+#include "encoder.h"
 #include <asf.h>
 #include <util/delay.h>
 #include <avr/io.h>
@@ -13,25 +14,24 @@ int main (void)
 	USART_init(MYUBRR);
 	
 	can_init();
-	can_data_t data;
+
 	printf("\n\n\n\n\n begin!!! \n\r");
 	DDRB |= (1 << PINB5);
 	timer_init();
 	adc_init();
-	sei();
+	
 	timer_1_set_top(125);
 	motor_init();
+	sei();
+	encoder_calibrate();
+	
+	
 	while (1)
 	{
-		//printf("he");
-		can_recieve_msg(&data);
-		if (data.id != 0)
-		{
-			//printf("ID = %u, leftslider: %u, rightslider: %u \r",data.id, data.data[0], data.data[1]);
-			timer_1_set_top(data.data[0]);
-			motor_update_pos(data.data[1]);
-		}
+
+
 	}
+	
 }
 
 /*
@@ -58,3 +58,4 @@ ISR(ADC_vect){
 ISR(TIMER0_COMPA_vect){
 	ADCSRA |= (1<<ADSC);
 }
+

@@ -177,9 +177,9 @@ slider_postion_t slider_get_postion(void){
 	slider_postion_t slider_postion;
 	
 	
-	slider_postion.left_slider = 100*adc_read(3)/0xFF;
-	slider_postion.right_slider = 100*adc_read(2)/0xFF;
-	
+	slider_postion.left_slider = adc_read(3);
+	slider_postion.right_slider = adc_read(2);
+	//printf("%u \r",slider_postion.right_slider);
 	return slider_postion;
 	
 }

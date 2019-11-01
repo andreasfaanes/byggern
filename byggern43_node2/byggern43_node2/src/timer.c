@@ -7,6 +7,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "timer.h"
+#include <stdio.h>
 
 void timer_init(void){	
 	//Timer 0:
@@ -25,14 +26,21 @@ void timer_init(void){
 	TCCR1B |= (1 << WGM13) | (1 << WGM12) | (1 << CS10) | (1 << CS11);
 	ICR1 = 5000;
 	OCR1A = 300;
+	
+	//timer 2:
+	TCCR3A |= (1 << WGM31);
+	TCCR3B |= (1 << CS02)|(1 << CS30);
+	OCR3A = 250;
+	TIMSK3 |= (1 << OCIE3A);
 }
 
 void timer_1_set_top(uint16_t top_val){
 	//Formula in ordr to make the dutycycle of the PWM. Done by computing the prescaler. Had to invert the input (100-top_val) in order to get the orientation right
-	uint16_t x = (((100-top_val)*250)/84)+(225);
-	if (x <= 230)
+	uint16_t x = (((255-top_val)*10*25)/(214))+(225);
+	//printf("%u   \r",x);
+	if (x <= 225)
 	{
-		x = 230;
+		x = 225;
 	}else if (x >= 520)
 	{
 		x = 520;

@@ -110,7 +110,7 @@ int main(void)
 		menu_navigation();
 		slider_send_pos();
 		//_delay_ms(300);
-		
+		//slider_get_postion();
 		//print_lunde();
 		//printf("done");
 	}

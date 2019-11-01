@@ -14,8 +14,9 @@ src/main.d src/main.o: ../src/main.c ../src/usart.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
- ../src/can.h ../src/timer.h ../src/ADC.h ../src/motor.h ../src/asf.h \
- ../src/ASF/common/boards/board.h ../src/ASF/mega/utils/compiler.h \
+ ../src/can.h ../src/timer.h ../src/ADC.h ../src/motor.h ../src/encoder.h \
+ ../src/asf.h ../src/ASF/common/boards/board.h \
+ ../src/ASF/mega/utils/compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  ../src/ASF/common/utils/parts.h ../src/ASF/common/utils/interrupt.h \
@@ -67,6 +68,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../src/ADC.h:
 
 ../src/motor.h:
+
+../src/encoder.h:
 
 ../src/asf.h:
 

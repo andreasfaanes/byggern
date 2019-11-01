@@ -6,6 +6,8 @@ src\ADC.c
 
 src\can.c
 
+src\encoder.c
+
 src\MCP2515.c
 
 src\motor.c
