@@ -7,29 +7,29 @@
 
 #include <avr/io.h>
 #include <stdio.h>
-#include "spi.h"
+#include "include/spi.h"
 
-void spi_init(void){
+void Spi_Init(void){
 	DDRB |= (1 << PINB0)|(1 << PINB7)|(1 << PINB2)|(1 << PINB1); // setting ss, mosi and sck as output
 	DDRB &= ~(1 << PINB3);	// setting miso as input
 	SPCR |= (1<<SPE)|(1<<MSTR)|(1 << SPR0); // enable SPI and selectiong master mode
 }
 	
-void spi_write(uint8_t data){
+void Spi_Write(uint8_t data){
 	SPDR = data;
 	while(!(SPSR & (1<<SPIF)));
 }
 
-uint8_t spi_read(void){
+uint8_t Spi_Read(void){
 	SPDR = 0xaa;
 	while(!(SPSR & (1<<SPIF)));
 	return SPDR;
 }
 
-void slave_enable(void){
+void Slave_Enable(void){
 	PORTB &= ~(1 << PINB7);
 }
 
-void slave_deselect(void){
+void Slave_Deselect(void){
 	PORTB |= (1 << PINB7);
 }

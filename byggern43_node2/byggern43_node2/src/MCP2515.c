@@ -5,51 +5,52 @@
  *  Author: henridah
  */ 
 
-#include "MCP2515.h"
-#include "spi.h"
+#include "include/MCP2515.h"
+#include "include/spi.h"
 #include <avr/interrupt.h>
 #include <avr/io.h>
 
-uint8_t mcp_read(uint8_t addr){
+uint8_t Mcp_Read(uint8_t addr){
 	uint8_t result;
 	
-	slave_enable();
+	Slave_Enable();
 	
-	spi_write(MCP_READ);
-	spi_write(addr);
-	result = spi_read();
+	Spi_Write(MCP_READ);
+	Spi_Write(addr);
+	result = Spi_Read();
 	
-	slave_deselect();
+	Slave_Deselect();
 	return result;
 }
 
-void mcp_write(uint8_t addr, uint8_t data){
-	slave_enable();
-	spi_write(MCP_WRITE);
-	spi_write(addr);
-	spi_write(data);
-	slave_deselect();
+void Mcp_Write(uint8_t addr, uint8_t data){
+	Slave_Enable();
+	Spi_Write(MCP_WRITE);
+	Spi_Write(addr);
+	Spi_Write(data);
+	Slave_Deselect();
 }
 
-void mcp_reset(void){
-	slave_enable();
-	spi_write(MCP_RESET);
-	slave_deselect();
+void Mcp_Reset(void){
+	Slave_Enable();
+	Spi_Write(MCP_RESET);
+	Slave_Deselect();
 }
 
-void mcp_modify_bit(uint8_t addr, uint8_t mask, uint8_t data){
-	slave_enable();
-	spi_write(MCP_BITMOD);
-	spi_write(addr);
-	spi_write(mask);
-	spi_write(data);
-	slave_deselect();
+void Mcp_Modify_Bit(uint8_t addr, uint8_t mask, uint8_t data){
+	//Function to modify ONE specific bit in an adress
+	Slave_Enable();
+	Spi_Write(MCP_BITMOD);
+	Spi_Write(addr);
+	Spi_Write(mask);
+	Spi_Write(data);
+	Slave_Deselect();
 }
 
-void mcp_request_to_send(uint8_t buffer){
-	slave_enable();
-	spi_write(0x80 | (1<< buffer));
-	slave_deselect();
+void Mcp_Request_to_Send(uint8_t buffer){
+	Slave_Enable();
+	Spi_Write(0x80 | (1<< buffer));
+	Slave_Deselect();
 }
 
 

@@ -82,7 +82,7 @@
     <com_atmel_avrdbg_tool_atmelice>
       <ToolOptions>
         <InterfaceProperties>
-          <JtagDbgClock>208000</JtagDbgClock>
+          <JtagDbgClock>200000</JtagDbgClock>
         </InterfaceProperties>
         <InterfaceName>JTAG</InterfaceName>
       </ToolOptions>
@@ -102,7 +102,7 @@
       </ToolNumber>
       <ToolName xmlns="">Simulator</ToolName>
     </com_atmel_avrdbg_tool_simulator>
-    <avrtoolinterfaceclock>208000</avrtoolinterfaceclock>
+    <avrtoolinterfaceclock>200000</avrtoolinterfaceclock>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -230,60 +230,76 @@
     <Folder Include="src\ASF\mega\utils\assembler\" />
     <Folder Include="src\ASF\mega\utils\preprocessor\" />
     <Folder Include="src\config\" />
+    <Folder Include="src\include" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\ADC.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\ADC.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\can.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\can.h">
+    <Compile Include="src\include\solenoid.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\solenoid.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\include\PID.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\include\settings.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\PID.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\encoder.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\encoder.h">
+    <Compile Include="src\include\ADC.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\include\can.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\include\encoder.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\include\MCP2515.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\include\motor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\include\spi.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\include\timer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\include\TWI_Master.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\include\usart.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\MCP2515.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\MCP2515.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\motor.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\motor.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\spi.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\spi.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\timer.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\timer.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\TWI_Master.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\TWI_Master.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="src\usart.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\usart.h">
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\asf.h">

@@ -11,10 +11,10 @@
 
 #include <stdio.h>
 
-void spi_init(void);
-void spi_write(uint8_t data);
-uint8_t spi_read(void);
-void slave_enable(void);
-void slave_deselect(void);
+void Spi_Init(void);
+void Spi_Write(uint8_t data);
+uint8_t Spi_Read(void);
+void Slave_Enable(void);
+void Slave_Deselect(void);
 
 #endif /* SPI_H_ */

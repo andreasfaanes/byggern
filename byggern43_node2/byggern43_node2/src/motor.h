@@ -21,10 +21,10 @@ typedef enum DIR{
 	STOP
 	}DIR;
 
-void motor_init(void);
-void motor_update_pos(uint8_t pos);
-void motor_reset(void);
-void DAC_send(uint8_t speed);
-void motor_Direction(uint8_t dir,uint8_t speed);
+void Motor_Init(void);
+void Motor_Update_Pos(uint8_t pos);
+void Motor_Reset(void);
+void DAC_Send(uint8_t speed);
+void Motor_Direction(uint8_t dir,uint8_t speed);
 
 #endif /* MOTOR_H_ */

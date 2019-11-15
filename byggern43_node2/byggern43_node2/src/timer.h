@@ -10,9 +10,9 @@
 #define TIMER_H_
 
 
-void timer_init(void);
+void Timer_Init(void);
 
-void timer_1_set_top(uint16_t top_val);
+void Timer_1_Set_Top(uint16_t top_val);
 
 
 #endif /* TIMER_H_ */

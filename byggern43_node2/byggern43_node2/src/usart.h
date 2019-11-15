@@ -13,6 +13,6 @@ int USART_Transmit(char data, FILE *f);
 
 int USART_Receive(FILE* f);
 
-int USART_init(unsigned int ubrr);
+int USART_Init(unsigned int ubrr);
 
 #endif

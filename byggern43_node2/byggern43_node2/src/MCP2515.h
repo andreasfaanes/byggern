@@ -171,10 +171,10 @@ Copyright 2003 Kimberly Otten Software Consulting
 
 
 
-uint8_t mcp_read(uint8_t addr);
-void mcp_write(uint8_t addr, uint8_t data);
-void mcp_reset(void);
-void mcp_request_to_send(uint8_t buffer);
-void mcp_modify_bit(uint8_t addr, uint8_t mask, uint8_t data);
+uint8_t Mcp_Read(uint8_t addr);
+void Mcp_Write(uint8_t addr, uint8_t data);
+void Mcp_Reset(void);
+void Mcp_Request_to_Send(uint8_t buffer);
+void Mcp_Modify_Bit(uint8_t addr, uint8_t mask, uint8_t data);
 
 #endif

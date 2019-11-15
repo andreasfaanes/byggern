@@ -1,5 +1,6 @@
 
-#include "usart.h"
+#include "include/usart.h"
+#include "include/settings.h"
 #include <stdio.h>
 #include <avr/io.h>
 
@@ -25,7 +26,7 @@ int USART_Receive(FILE* f){
 	return UDR0;
 }
 // USART init
-int USART_init(unsigned int ubrr){
+int USART_Init(unsigned int ubrr){
 	UBRR0H = (unsigned char)(ubrr >> 8);
 	UBRR0L = (unsigned char) ubrr;
 	/*Enable receiver and transmitter and receive interrupt*/
