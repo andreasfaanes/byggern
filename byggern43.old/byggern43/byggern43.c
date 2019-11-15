@@ -3,7 +3,7 @@
  *
  * Created: 30.08.2019 10:09:51
  *  Author: andrefaa
- */ 
+ */
 #include "src/include/usart.h"
 #include "source/include/settings.h"
 #include <stdio.h>
@@ -29,7 +29,7 @@ ISR(TIMER0_OVF_vect){
 
 void int_timer_setup(void){
 
-	
+
 }
 
 void SRAM_test(void)
@@ -71,7 +71,7 @@ void SRAM_test(void)
 
 joycon_t joycon;
 slider_postion_t slider_pos;
-		
+
 volatile char *ext_oled_data = (char *) OLED_DATA_MEM_START;
 volatile char *ext_oled_com = (char *) OLED_COM_MEM_START;
 void test_function_joycon_setup(void){
@@ -83,13 +83,13 @@ void test_function_joycon_loop(void){
 	slider_pos = slider_get_postion();
 	printf("x = %i,				y = %i				dir = %u \n\r", joycon.x,joycon.y, joycon.direction);
 	printf("LEFT = %i,				RIGHT = %i				\n\r", slider_pos.left_slider,slider_pos.right_slider);
-	
+
 }
 
 // main function
 int main(void)
 {
-	
+
 	USART_init(MYUBRR);
 	DDRD |= (1 << PIND5);
 	printf("start!\n\r");
@@ -101,11 +101,11 @@ int main(void)
 	//oled_reset();
 	//oled_update();
 	music_start();
-	
+
 	sei(); // global interupt enable
 	printf("Her? \n\r");
 	while(1)
-	{	
+	{
 		//PORTD |= (1 << PIND5);
 		menu_navigation();
 		slider_send_pos();
@@ -126,5 +126,5 @@ ISR(TIMER3_COMPA_vect){
 	}else{
 		note ++;
 	}
-	
+
 }
