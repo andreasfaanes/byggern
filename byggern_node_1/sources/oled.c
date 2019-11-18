@@ -108,13 +108,7 @@ void Print_Lunde(void){
 	{
 		*oled_write = Lunde_Byte(i);
 	}
-/*
-	volatile char *sram_write = (char *) (0x1800);
 
-	for (uint16_t i = 0; i < 0x400; i++)
-	{
-		*sram_write = Lunde_Byte(i);
-	}*/
 }
 
 void Oled_Init(void){

@@ -18,7 +18,7 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-int16_t slider_pos = 250;//Sets default to middle
+int16_t slider_pos = 120;//Sets default to middle
 int16_t pos = 0;
 uint8_t shoot_solenoid_status = 0;
 can_data_t data;
@@ -33,9 +33,7 @@ void Can_Init(void){
 	Mcp_Modify_Bit(MCP_CANINTE,0x01,0x01);
 	Mcp_Modify_Bit(MCP_CANCTRL, MODE_MASK,MODE_NORMAL);
 	
-	//DDRD &= ~(1<<PD2);
 
-	//GICR |= (1 << INT0);
 }
 
 void Can_Send_Msg(can_data_t* data){

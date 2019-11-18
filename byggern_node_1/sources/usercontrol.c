@@ -15,17 +15,7 @@
 
 
 
-typedef enum {
-	MAIN_MENU,
-	SETTINGS,
-	PLAY_GAME,
-	HIGHSCORE,
-	DIFFICULTY,
-	EASY,
-	MEDIUM,
-	HARD,
-	RECALIBRATE
-}menu_flag_t;
+
 
 
 menu_item_t main_menu, settings, play_game,  difficulty, highscore, easy, medium, hard;
@@ -110,6 +100,12 @@ menu_item_t hard = {
 	.flag = HARD
 };
 
+menu_item_t select_name = {
+	.parent = &play_game,
+	.title = "select name",
+	.num_child = 0,
+	.flag = SELECT_NAME
+};
 
 
 
@@ -136,31 +132,15 @@ void Update_Menu_Parent(void){
 
 void Update_Menu(void){
 	Oled_Reset();
-	//printf("%u", current_menu->num_child);
-	//if (current_menu->num_child != 0){
-	Update_Menu_Parent();
-	//}
-	/*
-	else// (current_menu->title=="higscore") 
-		{
-			//Menu_Line_Change("A",4,0);
-			Print_Lunde();
 
-		}
-		//Print_Lunde();
-	
-	//Oled_Print_Custom(0,i+2);
-	*/
+	Update_Menu_Parent();
+
 }
 
 void Oled_Menu_Setup(void){
 	current_menu = &main_menu;
 	current_child = current_menu->child[0];
-	/*
-	menu_line_change(current_menu->title,0,0);
-	menu_line_change(current_menu->child[0]->title,1,1);
-	menu_line_change(current_menu->child[1]->title,2,0);
-	*/
+
 	Update_Menu();
 }
 
@@ -173,7 +153,6 @@ void Change_Child(position_t direction){
 		current_child_num -= 1;
 	}
 	current_child = current_menu->child[current_child_num];
-	//Update_Menu();
 }
 
 void User_Control_Init(){
@@ -267,7 +246,132 @@ void Slider_Send_Pos(void){
 	Can_Send_Msg(&data);
 }
 
+//////////////////////////////////////////////////////////////////////////
+// variables for name function
+char *alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ_";
+uint8_t current_letter = 0;
+uint8_t current_letter_y = 0;
+bool hold_joycon_alphabet = false;
+//////////////////////////////////////////////////////////////////////////
+
+uint8_t select_pos(uint8_t x,uint8_t y){
+	if (x == 0 && y == 0 )
+	{
+		return 0;
+	}
+	else if (x == 0)
+	{
+		return y;
+	}
+	else if (y == 0)
+	{
+		return x;
+	}
+	else
+	{
+		return x*y;
+	}
+}
+
+
+
+void alphabet_navigation(void){
+	joycon_t joycon = Joycon_Get_Direction();
+	if (!hold_joycon_alphabet)
+	{
+		switch(joycon.direction){
+			case DOWN:
+				hold_joycon_alphabet = true;
+				if (current_letter+9 < 27)
+				{
+					current_letter += 9;
+				}
+				break;
+			case UP:
+				hold_joycon_alphabet = true;
+				if (current_letter-9 >= 0)
+				{
+					current_letter -= 9;
+				}
+				break;
+			case LEFT:
+				hold_joycon_alphabet = true;
+				if (current_letter-1 >= 0)
+				{
+					current_letter --;
+				}
+				break;
+			case RIGHT:
+				hold_joycon_alphabet = true;
+				if (current_letter+1 < 27)
+				{
+					current_letter ++;
+				}
+				break;
+			default:
+			break;
+		}
+	}else
+	{
+		if (joycon.direction == NEUTRAL)
+		{
+			hold_joycon_alphabet = false;
+		}
+	}
+}
+
+void print_alphabet(void){
+	Oled_Reset();
+	uint8_t y = 0;
+	for (uint8_t i = 0; i < 3; i++)
+	{
+		Oled_Clear_Line(i);
+		for (uint8_t j = 0; j < 9; j++)
+		{
+			if (current_letter == y)
+			{
+				Oled_Print_Char(alphabet[y],1,j);
+			}
+			else
+			{
+				Oled_Print_Char(alphabet[y],0,j);
+			}
+			y++;
+		}
+	}
+}
+
+char select_letter_func(void){
+	current_letter = 0;
+
+	while (read_button(LEFT) == 0)
+	{
+		alphabet_navigation();
+		print_alphabet();
+		Oled_Update();
+	}
+	return alphabet[current_letter];
+}
+
+void create_name(char *name, uint8_t length){
+	for (uint8_t i = 0; i < length; i++)
+	{
+			while(read_button(LEFT) )
+			{
+			}
+		name[i] = select_letter_func();
+	}
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+char *name;
 bool hold_joycon = false;
+//////////////////////////////////////////////////////////////////////////
+
+void get_name(char *name_copy){
+	name_copy = name; 
+}
 void Menu_Navigation(void){
 	joycon_t joycon = Joycon_Get_Direction();
 	if (!hold_joycon)
@@ -321,16 +425,13 @@ void Menu_Functionality(void){
 	{
 	case MAIN_MENU:
 		Update_Menu();
-		//printf("MainMenu");
 		break;
 	case SETTINGS:
 		Update_Menu();
-		//printf("Settings");
 		break;
 	case PLAY_GAME:
 		if (IN_MENU == Get_Game_State())
 		{
-			Update_Menu();
 			Set_Gamestate(START_GAME);
 		}
 		break;
@@ -362,6 +463,9 @@ void Menu_Functionality(void){
 			Set_Gamestate(CALIBRATE);
 		}
 		break;
+	case SELECT_NAME:
+		
+		break;
 	default:
 		Update_Menu();
 		break;
@@ -382,7 +486,6 @@ void Node_One_Init(){
 	_delay_ms(3000);
 	Oled_Reset();
 	Print_Lunde();
-	//uint8_t calibrate_done = 0;
 	uint8_t data_aquired = 0;
 	can_data_t msg_recv;
 	can_data_t msg_tran;
@@ -396,9 +499,6 @@ void Node_One_Init(){
 		Can_Send_Msg(&msg_tran);
 		_delay_ms(100);
 		Can_Recieve_Msg(&msg_recv);
-		//printf("The ID of the msg is: ");
-		//printf("%u", msg_recv.id);
-		//printf("\n\r");
 		if (msg_recv.id == 11)
 		{
 			
@@ -409,16 +509,6 @@ void Node_One_Init(){
 	}
 	printf("Handshake done");
 	
-	
-	/*
-	while(calibrate_done == 0)
-	{
-		Can_Recieve_Msg(&msg_recv);
-		if (msg_recv.id == 10)
-		{
-			calibrate_done = 1;
-		}
-	}*/
 	_delay_ms(2000);
 	Oled_Reset();
 }

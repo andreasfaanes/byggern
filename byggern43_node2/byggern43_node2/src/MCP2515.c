@@ -58,9 +58,3 @@ void Mcp_Request_to_Send(uint8_t buffer){
 ISR(INT0_vect){
 }
 
-/*
-	endre alt som heter can_read til f.eks mcp2515_read
-	
-	trenger ingen init for mcp2515, heller lag et eget can-bibliotek med can_init, can_send og can_receive
-
-*/

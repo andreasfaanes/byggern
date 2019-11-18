@@ -45,7 +45,7 @@ void Encoder_Calibrate(void){
 	TCCR3B &= ~((1 << CS02)|(1 << CS30));
 	Motor_Direction(RIGHT, 100);
 	_delay_ms(1000);
-	Motor_Direction(LEFT, 100);
+	Motor_Direction(LEFT, 90);
 	_delay_ms(1000);
 	Motor_Direction(STOP,0);
 	_delay_ms(100);

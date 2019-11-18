@@ -41,6 +41,10 @@ void Motor_Reset(void){
 
 void Motor_Direction(uint8_t dir,uint8_t speed)
 {
+	if (speed > 100)
+	{
+		speed = 100;
+	}
 	if(dir == LEFT){
 		PORTH &= ~(1 << PINH1);
 		DAC_Send(speed);

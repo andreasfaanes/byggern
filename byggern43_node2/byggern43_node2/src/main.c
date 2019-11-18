@@ -61,7 +61,7 @@ int main (void)
 	can_data_t calibrate_done;
 	while (1)
 	{
-		//printf("test");
+
 		data.id = 0;
 		Can_Recieve_Msg(&data);
 		switch(data.id){
@@ -72,13 +72,13 @@ int main (void)
 				Set_Slide_Pos(255 - data.data[1]);
 				//checks if a shot is fired from the solenoid.
 				set_shoot_solenoid_status (data.data[3]);
-				//Game_Set(1);
+				
 				break;
 			case 2:
 				Game_Set(1);
 				break;
 			case(8):
-				//timer_3_off();
+				
 				
 				calibrate_recv.id = 18;
 				Can_Send_Msg(&calibrate_recv);
@@ -87,7 +87,7 @@ int main (void)
 				Encoder_Calibrate();
 				Can_Send_Msg(&calibrate_done);
 				printf("recalibrate done \n\r");
-				//timer_3_on();
+			
 				break;
 			default:
 				break;

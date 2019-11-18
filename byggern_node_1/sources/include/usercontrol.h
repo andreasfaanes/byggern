@@ -1,6 +1,25 @@
 #include <stdio.h>
 
-typedef enum {NEUTRAL, LEFT, RIGHT, UP, DOWN} position_t;
+typedef enum {
+	NEUTRAL, 
+	LEFT, 
+	RIGHT, 
+	UP, 
+	DOWN
+}position_t;
+
+typedef enum {
+	MAIN_MENU,
+	SETTINGS,
+	PLAY_GAME,
+	HIGHSCORE,
+	DIFFICULTY,
+	EASY,
+	MEDIUM,
+	HARD,
+	RECALIBRATE,
+	SELECT_NAME
+}menu_flag_t;
 
 typedef struct
 {
@@ -27,6 +46,8 @@ typedef struct menu_item
 }menu_item;
 
 
+
+
 /**
  * 	initalize the user controll
  *
@@ -46,5 +67,5 @@ uint8_t read_button(uint8_t button);
 void Update_Menu_Parent(void);
 void Node_One_Init();
 void Update_Menu(void);
-
+void create_name(char *name, uint8_t length);
 void Move_To_Parent(void);

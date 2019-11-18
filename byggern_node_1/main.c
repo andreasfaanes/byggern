@@ -39,7 +39,7 @@ void can_check_message(void){
 		case (16):// game over
 			if (Get_Game_State() == IN_GAME)
 			{
-				Set_Gamestate(END_GAME);
+				Set_Gamestate(SAVE_SCORE);
 			}
 			break;
 		case (17): // wait for calibrate to finish
@@ -87,7 +87,7 @@ int main(void)
 		Oled_Update();
 		Game_Machine();
 		Menu_Functionality();
-		//_delay_ms(100);
+
     }
 }
 
@@ -100,17 +100,4 @@ ISR(TIMER0_OVF_vect){
 uint8_t program_counter = 0;
 
 ISR(TIMER3_COMPA_vect){
-	//printf("timer 3 test ");
-	//
-	//Oled_Update();
-	//if (program_counter%100 == 0)
-	//{
-	//	Game_Machine();
-	//}
-	//if (program_counter == 250)
-	//{
-	//	Menu_Functionality();
-	//	program_counter = 0;
-	//}
-
 }

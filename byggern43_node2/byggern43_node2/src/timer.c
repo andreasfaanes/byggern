@@ -33,7 +33,7 @@ void Timer_Init(void){
 void Timer_1_Set_Top(uint16_t top_val){
 	//Formula in ordr to make the dutycycle of the PWM. Done by computing the prescaler. Had to invert the input (100-top_val) in order to get the orientation right
 	uint16_t x = (((255-top_val)*10*25)/(214))+(225);
-	//printf("%u   \r",x);
+
 	if (x <= 225)
 	{
 		x = 225;

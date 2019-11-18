@@ -28,7 +28,7 @@ void Timer_Init(void){
 	TCCR3A &= ~(1 << COM3A1) & ~(1 << COM3A0) & ~(1 << WGM31) & ~(1 << WGM30);
 	TCCR3B &= ~(1 << WGM33);
 	TCCR3B |= (1 << WGM32);
-
+	OCR3A = 500;
 	ETIMSK |= (1 << OCIE3A);//Set the compare match interrupt enable
 }
 

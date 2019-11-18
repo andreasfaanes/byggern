@@ -38,13 +38,3 @@ int USART_Init(unsigned int ubrr){
 	
 	return 0;
 }
-/*
-ISR(USART0_RXC_vect){
-			if (USART_Receive() == 'a')
-			{
-				
-				USART_Transmit('k');
-				USART_Transmit('k');
-			}
-}
-*/

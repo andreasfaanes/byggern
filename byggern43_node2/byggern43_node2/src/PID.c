@@ -29,7 +29,7 @@ uint8_t dummy_difficulty;
 
 int16_t Calculate_PID_Power(int16_t slider_pos, int16_t pos){
 	
-	//pos = Encoder_Read_Data();
+
 	//scales the regulator according to the resolution provided by the encoder
 	int16_t difference = abs(Read_Max_Left_Pos() - Read_Max_Right_Pos());
 	int16_t scaled_slider_ref = (difference/255)*slider_pos;
@@ -78,8 +78,8 @@ void Set_PID_Diffiuculty(void){
 	//Can_Recieve_Msg(&data);
 	//Easy
 	if(dummy_difficulty == 0){
-		double Kp = 0.04;
-		double Ki = 0.02;
+		Kp = 0.04;
+		Ki = 0.02;
 	//Medium
 	}else if(dummy_difficulty == 1){
 		Kp = 0.08;

@@ -11,7 +11,7 @@
 
 void ADC_Init(void);
 void Game_Over(uint8_t absorbed_light_intensity);
-//void game_over(void);
+
 void Game_Set(uint8_t set);
 
 #endif /* ADC_H_ */

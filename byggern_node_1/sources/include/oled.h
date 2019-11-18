@@ -37,7 +37,7 @@ void Oled_Home(void);
 void Oled_Goto_Line(uint8_t line);
 void Oled_Clear_Line(uint8_t line);
 void Oled_Pos(uint8_t row);
-void Oled_Print_char(char character,uint8_t inverted, uint8_t column);
+void Oled_Print_Char(char character,uint8_t inverted, uint8_t column);
 void Oled_Print(char* characters,uint8_t inverted);
 void Oled_Set_Brightness(uint8_t lvl);
 void Oled_Data_Write(uint8_t data, uint8_t column);
