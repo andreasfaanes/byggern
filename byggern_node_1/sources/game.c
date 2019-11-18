@@ -21,6 +21,7 @@ uint8_t game_state = INITIAL;
 uint16_t score = 0;
 uint8_t counter = 0;
 uint16_t list_highscore[5];
+can_data_t start_game;
 
 //////////////////////////////////////////////////////////////////////////
 
@@ -32,6 +33,7 @@ void Game_Machine(void){
 	uint16_t temp = 0;
 	uint16_t temp2 = 0;
 	uint8_t check = 0;
+	start_game.id = 2;
 	switch(game_state){
 		case INITIAL:
 
@@ -44,23 +46,36 @@ void Game_Machine(void){
 			break;
 			
 		case START_GAME: // init the single game
+			
 			score = 0;
+			Menu_Line_Change("GAME STARTS IN:",0,0);
+			char countdown[2];
+			for(uint8_t i = 0; i <3; i++){
+				sprintf(countdown,"%u",3-i);
+				Menu_Line_Change(countdown,3,0);
+				Oled_Update();
+				_delay_ms(1000);
+			}
+			Oled_Reset(); 
+			Can_Send_Msg(&start_game);
 			game_state = IN_GAME;
 			break;
 			
 		case IN_GAME:
 			Slider_Send_Pos();
 			char your_score[15];
+			char highest_score[15];
 			sprintf(your_score,"YOUR SCORE: %u",score);
 			Menu_Line_Change(your_score,1,0);
+			sprintf(highest_score,"%u",list_highscore[0]);
 			Menu_Line_Change("HIGHEST SCORE:",4,0);
+			Menu_Line_Change(highest_score,5,0);
+			
 			counter ++;
 			if(counter > 20){
 				score ++;
 				counter = 0;
 			}
-			Update_Menu();
-			Oled_Update();
 			break;
 			
 		case IN_MENU:
@@ -97,9 +112,13 @@ void Game_Machine(void){
 			calibrate_msg.data[0] = 8;
 			calibrate_msg.length = 1;
 			Can_Send_Msg(&calibrate_msg);
-			_delay_ms(4000);
-			Move_To_Parent();
+			Set_Gamestate(CALIBRATE_WAIT);
 			break;
+			
+		case CALIBRATE_WAIT:
+			Move_To_Parent();
+			Set_Gamestate(IN_MENU);
+			break; 
 	}
 }
 

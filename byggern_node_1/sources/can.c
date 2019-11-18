@@ -30,23 +30,23 @@ void Can_Send_Msg(can_data_t* data){
 	Mcp_Write(MCP_TXB0SIDH,data->id / 0b1000);
 	Mcp_Write(MCP_TXB0SIDL,(data->id % 0b1000) << 5);
 	Mcp_Write(MCP_TXB0DLC,data->length);
-
+	printf("SENDT VALID MESSAGE id: %u\n\r", data->id);
 	for (uint8_t i = 0; i < data->length; i++)
 	{
 		Mcp_Write(MCP_TXB0D0+i,data->data[i]);
 	}
-
+	
 	Mcp_Request_to_Send(0); //1
 }
 
 void Can_Recieve_Msg(can_data_t* data){
 
 	if (Mcp_Read(MCP_CANINTF) & 0x01){
-		printf("VALID MESSAGE \n\r");
+		
 		uint8_t idhigh = Mcp_Read(MCP_RXB0SIDH);
 		uint8_t idlow = Mcp_Read(MCP_RXB0SIDL);
 		data->id = (idhigh << 3)|(idlow >> 5);
-
+		printf("VALID MESSAGE recieved with id: %u\n\r", data->id);
 		data->length = Mcp_Read(MCP_RXB0DLC) & 0x0f;
 
 		for (uint8_t i = 0; i < data->length; i++)

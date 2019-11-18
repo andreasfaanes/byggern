@@ -43,10 +43,9 @@ void can_check_message(void){
 			}
 			break;
 		case (17): // wait for calibrate to finish
-			if (Get_Game_State() == CALIBRATE)
-			{
-				Move_To_Parent();
-				Set_Gamestate(IN_MENU);
+			if (Get_Game_State() == CALIBRATE_WAIT)
+			{					
+				Set_Gamestate(IN_MENU);				
 			}
 			break;
 		case (18):
@@ -63,39 +62,55 @@ int main(void)
 {
 	cli();
 	USART_Init(MYUBRR);
-	printf("begin");
+	printf("\n\n\rstart of program\n\r");
 	DDRD |=(1<<PIND5);
-	Timer_3_off();
+	
     Timer_Init();
 	Timer_3_off();
+	
 	User_Control_Init();
-	printf("here?");
     Can_Init();
+	
+	printf("\n\rwaiting on node 1\n\r");
+	
 	Node_One_Init();
-	
-	
+
 	Oled_Menu_Setup();
-	//Timer_3_on();
-	Timer_3_off();
+	
 	sei();
+	Timer_3_on();
+	printf("\n\rinit done\n\r");
+
     while (1)
     {
-		Game_Machine();
-		Oled_Update();
-		Menu_Functionality();
 		can_check_message();
-		_delay_ms(100);
+		Oled_Update();
+		Game_Machine();
+		Menu_Functionality();
+		//_delay_ms(100);
     }
 }
 
 
 
 ISR(TIMER0_OVF_vect){
-
+	printf("timer 0 test ");
 }
 
-ISR(TIMER3_COMPA_vect){
-	//printf("herno");
+uint8_t program_counter = 0;
 
-	
+ISR(TIMER3_COMPA_vect){
+	//printf("timer 3 test ");
+	//
+	//Oled_Update();
+	//if (program_counter%100 == 0)
+	//{
+	//	Game_Machine();
+	//}
+	//if (program_counter == 250)
+	//{
+	//	Menu_Functionality();
+	//	program_counter = 0;
+	//}
+
 }

@@ -330,6 +330,7 @@ void Menu_Functionality(void){
 	case PLAY_GAME:
 		if (IN_MENU == Get_Game_State())
 		{
+			Update_Menu();
 			Set_Gamestate(START_GAME);
 		}
 		break;
@@ -341,13 +342,13 @@ void Menu_Functionality(void){
 		char one[15];
 		sprintf(one,"1st: %u",Get_Highscore(0));
 		char two[15];
-		sprintf(two,"1st: %u",Get_Highscore(1));
+		sprintf(two,"2nd: %u",Get_Highscore(1));
 		char three[15];
-		sprintf(three,"1st: %u",Get_Highscore(2));
+		sprintf(three,"3rd: %u",Get_Highscore(2));
 		char four[15];
-		sprintf(four,"1st: %u",Get_Highscore(3));
+		sprintf(four,"4th: %u",Get_Highscore(3));
 		char five[15];
-		sprintf(five,"1st: %u",Get_Highscore(4));
+		sprintf(five,"5th: %u",Get_Highscore(4));
 		Menu_Line_Change("HIGHSCORES:",0,0);
 		Menu_Line_Change(one,2,0);
 		Menu_Line_Change(two,3,0);
@@ -356,7 +357,10 @@ void Menu_Functionality(void){
 		Menu_Line_Change(five,6,0);
 		break;
 	case RECALIBRATE:
-		Set_Gamestate(CALIBRATE);
+		if (!(CALIBRATE == Get_Game_State()|| CALIBRATE_WAIT  == Get_Game_State()))
+		{
+			Set_Gamestate(CALIBRATE);
+		}
 		break;
 	default:
 		Update_Menu();
@@ -392,11 +396,15 @@ void Node_One_Init(){
 		Can_Send_Msg(&msg_tran);
 		_delay_ms(100);
 		Can_Recieve_Msg(&msg_recv);
+		//printf("The ID of the msg is: ");
+		//printf("%u", msg_recv.id);
+		//printf("\n\r");
 		if (msg_recv.id == 11)
 		{
 			
 			data_aquired = 1;
 		}
+		_delay_ms(100);
 
 	}
 	printf("Handshake done");

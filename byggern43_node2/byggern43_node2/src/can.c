@@ -18,7 +18,7 @@
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-int16_t slider_pos = 125;//Sets default to middle
+int16_t slider_pos = 250;//Sets default to middle
 int16_t pos = 0;
 uint8_t shoot_solenoid_status = 0;
 can_data_t data;
@@ -44,7 +44,7 @@ void Can_Send_Msg(can_data_t* data){
 	Mcp_Write(MCP_TXB0SIDL,(data->id % 0b1000) << 5);
 	
 	Mcp_Write(MCP_TXB0DLC,data->length);
-	
+	printf("Data with ID is sent %u   \n\r",data->id);
 	for (uint8_t i = 0; i < data->length; i++)
 	{
 		Mcp_Write(MCP_TXB0D0+i,data->data[i]);
@@ -56,12 +56,13 @@ void Can_Send_Msg(can_data_t* data){
 void Can_Recieve_Msg(can_data_t* data){
 	//checks if msg arrived
 	if (Mcp_Read(MCP_CANINTF) & 0x01){
-		//printf("VALID MESSAGE \n\r");
+		
+		
 		uint8_t idhigh = Mcp_Read(MCP_RXB0SIDH);
 		uint8_t idlow = Mcp_Read(MCP_RXB0SIDL);
 		//organized idhigh as MSB, idlow as LSB
 		data->id = (idhigh << 3)|(idlow >> 5);
-		
+		printf("Data with ID is recieved %u \n\r",data->id);
 		data->length = Mcp_Read(MCP_RXB0DLC) & 0x0f;
 		
 		for (uint8_t i = 0; i < data->length; i++)

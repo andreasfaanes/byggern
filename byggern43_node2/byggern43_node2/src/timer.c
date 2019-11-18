@@ -26,7 +26,7 @@ void Timer_Init(void){
 	//timer 3:
 	TCCR3A |= (1 << WGM31);
 	TCCR3B |= (1 << CS32)|(1 << CS30);
-	OCR3A = 250;
+	OCR3A = 2500;
 	TIMSK3 |= (1 << OCIE3A);
 }
 

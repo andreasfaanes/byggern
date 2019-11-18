@@ -43,11 +43,11 @@ int16_t Encoder_Read_Data(void){
 void Encoder_Calibrate(void){
 	//calibrates encoder in order to make the PI-regulator
 	TCCR3B &= ~((1 << CS02)|(1 << CS30));
-	Motor_Direction(RIGHT, 90);
+	Motor_Direction(RIGHT, 100);
 	_delay_ms(1000);
-	Motor_Direction(LEFT, 90);
+	Motor_Direction(LEFT, 100);
 	_delay_ms(1000);
-	Motor_Direction(STOP,90);
+	Motor_Direction(STOP,0);
 	_delay_ms(100);
 	max_left_pos = Encoder_Read_Data();
 	Motor_Direction(RIGHT, 100);

@@ -15,7 +15,8 @@ typedef enum game_state_t{
 	IN_GAME,
 	END_GAME,
 	IN_MENU,
-	CALIBRATE	
+	CALIBRATE,
+	CALIBRATE_WAIT	
 }game_state_t;
 
 void Game_Machine(void);
